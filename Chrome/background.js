@@ -4,15 +4,37 @@
 "use strict";
 
 chrome.runtime.onInstalled.addListener(function() {
-    chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tabInfo) => {
+    chrome.tabs.onUpdated.addListener(async(tabId, changeInfo, tabInfo) => {
         const isSoT = tabInfo.url.startsWith('https://www.seaofthieves.com/');
-        if(isSoT) { EnableApp(tabInfo.tabId) }
-        else { DisableApp(tabInfo.tabId) }
+        if(isSoT) {
+            EnableApp(tabInfo.tabId)
+        } else {
+            DisableApp(tabInfo.tabId)
+        }
     })
-    chrome.tabs.onActivated.addListener(async (tabInfo) => {
-        const isSoT = tabInfo.url.startsWith('https://www.seaofthieves.com/');
-        if(isSoT) { EnableApp(tabId) }
-        else { DisableApp(tabId) }
+    chrome.tabs.onActivated.addListener(async(tabInfo) => {
+        try {
+            const curTab = await chrome.tabs.get(tabInfo.tabId)
+            const isSoT = curTab.url.startsWith('https://www.seaofthieves.com/');
+            if(isSoT) {
+                EnableApp(tabId)
+            } else {
+                DisableApp(tabId)
+            }
+        } catch(error) {
+        }
+    })
+    chrome.tabs.onHighlighted.addListener(async(tabInfo) => {
+        try {
+            const curTab = await chrome.tabs.get(tabInfo.tabId)
+            const isSoT = curTab.url.startsWith('https://www.seaofthieves.com/');
+            if(isSoT) {
+                EnableApp(tabId)
+            } else {
+                DisableApp(tabId)
+            }
+        } catch(error) {
+        }
     })
 
     async function EnableApp(tabId) {
@@ -26,12 +48,15 @@ chrome.runtime.onInstalled.addListener(function() {
                 }
                 let cookieJSON = JSON.stringify(responseCookie)
                 let cookieBase64 = btoa(cookieJSON)
-                chrome.storage.local.set({rat: cookieBase64}, function() {});
+                chrome.storage.local.set({rat: cookieBase64}, function() {
+                });
             }
         })
     }
+
     async function DisableApp(tabId) {
         chrome.action.disable(tabId)
-        chrome.storage.local.set({rat: ''}, function() {});
+        chrome.storage.local.set({rat: ''}, function() {
+        });
     }
 })
