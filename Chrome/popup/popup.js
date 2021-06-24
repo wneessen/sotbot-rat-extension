@@ -9,9 +9,6 @@ document.addEventListener('readystatechange', function() {
         chrome.storage.local.get(['rat'], function(ratObj) {
             let ratField = document.querySelector('#rat')
             if(typeof ratField !== 'undefined') {
-                ratField.addEventListener('click', () => {
-                    ratField.select()
-                })
                 ratField.textContent = ratObj.rat
             }
 
