@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/montserrat.css" type="text/css" media="all">
     <link rel="stylesheet" href="../css/popup.css" type="text/css" media="all">
+    <script src="../vendor/clipboard.min.js"></script>
     <script src="popup.js"></script>
 </head>
 
 <body>
-    <!-- <div class="logo"><img src="../img/cbDebugLogo.png" width="230" /></div> //-->
     <h2 class="title">SoTBot RAT cookie extractor</h2>
-    <h5>Your SoTBot RAT is:</h5>
-    <textarea id="rat"></textarea>
+    <h5>Your SoTBot RAT token is:</h5>
+    <textarea id="rat">No RAT cookie found. Please log into www.seaofthives.com</textarea>
+    <form>
+        <button id="copyBtn" class="btn btn-primary" data-clipboard-target="#rat">Copy to clipboard</button>
+    </form>
 </body>
 
 </html>

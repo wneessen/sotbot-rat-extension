@@ -2,7 +2,7 @@
     "author": "wn@neessen.net",
     "name": "SoTBot RAT Cookie Extrator",
     "description": "Extension to extract your Sea of Thieves API access cookie",
-    "version": "0.5",
+    "version": "0.6",
     "manifest_version": 3,
     "action": {
         "default_icon": {

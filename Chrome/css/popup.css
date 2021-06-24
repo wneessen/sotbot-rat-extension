@@ -1,34 +1,43 @@
-html {
-    height: 300px !important;
-}
 body {
-    -webkit-user-select: none;
     font: 14px "Montserrat";
     color: rgba(0, 0, 0, 0.77);
     font-weight: 300;
-    padding-left: 0px;
-    padding-top: 0px;
-    background: -webkit-linear-gradient(top, #f2fbff 0%, #ffffff 64%) no-repeat;
-    background: -moz-linear-gradient(top, #f2fbff 0%, #ffffff 64%) no-repeat;
-    background: -ms-linear-gradient(top, #f2fbff 0%, #ffffff 64%) no-repeat;
-    background: linear-gradient(to bottom, #f2fbff 0%, #ffffff 64%) no-repeat;
-    width: 350px;
-}
-
-h2 {
-    font-weight: 500;
-    font-size: 20px;
-    color: #ff8a00;
-}
-
-.title {
-    margin-top: 10px;
-    text-align: center;
+    padding-left: 0;
+    padding-top: 0;
+    width: 450px;
 }
 
 textarea {
-    padding: 0;
     margin-top: -15px;
-    width: 350px;
-    height: 200px;
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+}
+
+.title {
+    text-align: center;
+}
+
+.btn {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border-radius: 0.35rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-primary {
+    color: #ffffff;
+    background-color: #1771ae;
+    border-color: #1771ae;
 }

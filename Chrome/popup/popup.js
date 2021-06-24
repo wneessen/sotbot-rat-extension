@@ -5,6 +5,7 @@
 
 document.addEventListener('readystatechange', function() {
     if(document.readyState === 'complete') {
+        new ClipboardJS('.btn')
         chrome.storage.local.get(['rat'], function(ratObj) {
             let ratField = document.querySelector('#rat')
             if(typeof ratField !== 'undefined') {
@@ -12,6 +13,12 @@ document.addEventListener('readystatechange', function() {
                     ratField.select()
                 })
                 ratField.textContent = ratObj.rat
+            }
+
+            let copyBtn = document.querySelector('#copyBtn')
+            if(typeof copyBtn !== 'undefined') {
+                copyBtn.addEventListener('click', () => {
+                })
             }
         });
     }
