@@ -29,7 +29,6 @@ chrome.runtime.onInstalled.addListener(function() {
     // Enable the action in the browser
     async function EnableApp(tabId) {
         chrome.action.enable(tabId)
-        chrome.action.setIcon({path: 'img/active_128.png', tabId: tabId})
         chrome.cookies.get({url: 'https://www.seaofthieves.com', name: 'rat'}, async cookieInfo => {
             if(cookieInfo.value !== '') {
                 let responseCookie = {
