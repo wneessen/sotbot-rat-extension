@@ -13,30 +13,20 @@ chrome.runtime.onInstalled.addListener(function() {
         }
     })
     chrome.tabs.onActivated.addListener(async(tabInfo) => {
-        try {
-            const curTab = await chrome.tabs.get(tabInfo.tabId)
-            const isSoT = curTab.url.startsWith('https://www.seaofthieves.com/');
-            if(isSoT) {
-                EnableApp(tabId)
-            } else {
-                DisableApp(tabId)
-            }
-        } catch(error) {
+        const curTab = await getCurrentTab()
+        if(typeof curTab === 'undefined') {
+            console.warn('Unable to query active tab')
+            return
         }
-    })
-    chrome.tabs.onHighlighted.addListener(async(tabInfo) => {
-        try {
-            const curTab = await chrome.tabs.get(tabInfo.tabId)
-            const isSoT = curTab.url.startsWith('https://www.seaofthieves.com/');
-            if(isSoT) {
-                EnableApp(tabId)
-            } else {
-                DisableApp(tabId)
-            }
-        } catch(error) {
+        const isSoT = curTab.url.startsWith('https://www.seaofthieves.com/');
+        if(isSoT) {
+            EnableApp(tabInfo.tabId)
+        } else {
+            DisableApp(tabInfo.tabId)
         }
     })
 
+    // Enable the action in the browser
     async function EnableApp(tabId) {
         chrome.action.enable(tabId)
         chrome.action.setIcon({path: 'img/active_128.png', tabId: tabId})
@@ -54,9 +44,27 @@ chrome.runtime.onInstalled.addListener(function() {
         })
     }
 
+    // Disable the action in the browser
     async function DisableApp(tabId) {
         chrome.action.disable(tabId)
         chrome.storage.local.set({rat: ''}, function() {
         });
     }
+
+    // Get the currently active tab
+    async function getCurrentTab() {
+        await delay(300)
+        let queryOptions = {active: true, currentWindow: true};
+        const tabs = await chrome.tabs.query(queryOptions)
+        if(!tabs.length) {
+            console.error("No active tabs found")
+        }
+        return tabs[0]
+    }
+
+    // Workaround for the freaking bug(feature), when tab data is not ready, yet
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 })
+
